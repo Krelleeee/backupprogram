@@ -18,7 +18,7 @@ rem Second Directory Selection
 	Set /p secdir=
 	IF "%secdir%"=="" GOTO Error
 	IF NOT EXIST %secdir% GOTO Createdir
-	If EXIST %secdir% GOTO Cp
+	IF EXIST %secdir% GOTO Cp
 	Echo.
 
 rem Creating directory
