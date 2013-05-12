@@ -18,7 +18,7 @@ rem Second Directory Selection
 	Set /p secdir=
 	IF "%secdir%"=="" GOTO Error
 	IF NOT EXIST %secdir% GOTO Createdir
-	If EXIST %secdir% GOTO Copy
+	If EXIST %secdir% GOTO Cp
 	Echo.
 
 rem Creating directory
@@ -27,19 +27,18 @@ rem Creating directory
 	Echo Would you like to create it? (y/n + return)
 	Set /p createdir=
 	IF "%createdir%" == "n" GOTO Start
-	IF "%createdir%" == "y" mkdir %secdir%
+	IF "%createdir%" == "y" GOTO Cp
 	IF "%createdir%"== "" GOTO Error
-	IF NOT EXIST %newdir% GOTO Error
-	IF EXIST %newdir% GOTO Copy
 	Echo.
 	GOTO Error
 
 	
 rem Copy
-	:Copy
+	:Cp
+	mkdir %secdir%
 	Echo Copying %firstdir%
-	Echo to %secdir%...
-	rem xcopy %firstdir% [%secdir%] /l /s /e /t 
+	Echo to %secdir%
+	XCOPY %firstdir% %secdir% /e /w
 	Echo Copy Complete
 	Echo.
 	GOTO End
